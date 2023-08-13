@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+
+  security-database:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: burhan
+      POSTGRES_PASSWORD: burhan123
+      POSTGRES_DB: security-service
+    networks:
+      - my-network
+
+  project-database:
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: burhan
+      POSTGRES_PASSWORD: burhan123
+      POSTGRES_DB: project-service
+    networks:
+      - my-network
+
+  task-database:
+    image: postgres
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: burhan
+      POSTGRES_PASSWORD: burhan123
+      POSTGRES_DB: task-service
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

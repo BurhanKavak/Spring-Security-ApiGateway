@@ -1,0 +1,41 @@
+
+# server settings
+spring:
+  application:
+    name: api-gateway
+
+  # gateway settings
+  cloud:
+    gateway:
+      routes:
+        - id: project-service
+          uri:
+            lb://PROJECT-SERVICE
+          predicates:
+            - Path= /project/**
+          filters:
+            - AuthenticationFilter
+
+        - id: task-service
+          uri:
+            lb://TASK-SERVICE
+          predicates:
+            - Path= /task/**
+          filters:
+            - AuthenticationFilter
+
+        - id: security-service
+          uri:
+            lb://SECURITY-SERVICE
+          predicates:
+            - Path= /auth/**
+
+
+
+
+
+# Eureka settings
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:9999/eureka
